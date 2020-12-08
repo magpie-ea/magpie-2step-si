@@ -11,7 +11,7 @@
   >
     <!-- The contents of the #title template slot will be displayed in the upper left corner of the experiment -->
     <template #title>
-      <div>“2Step-SI” Studie</div>
+      <div>2Step-SI Studie</div>
     </template>
 
     <!-- The contents of the #screens template slot define your experiment -->
@@ -88,6 +88,7 @@
               ...mouseTrack,
               response: (label === 'left'? ['f', 'w'] : ['w', 'f'])[lr],
               group,
+              left_right: lr,
             });
             $magpie.nextScreen()" />
           </template>
@@ -95,11 +96,8 @@
         </CategorizationMousetracking>
       </template>
       
-      <Screen :title="'Training is over'">
-        This is a sample instructions view.
-        <br />
-        <br />
-        <button @click="$magpie.nextScreen">to the main trials</button>
+      <Screen :title="'Training ist vorbei'">
+        <button @click="$magpie.nextScreen">zum Test</button>
       </Screen>
       
       <template v-for="i in test_length">
@@ -115,10 +113,11 @@
           </template>
           <template #feedback="{mouseTrack, label}">
             <Wait :time="500" @done="$magpie.addResult({
-              ...$magpie.currentTrial.training,
+              ...$magpie.currentTrial.test,
               ...mouseTrack,
               response: (label === 'left'? ['f', 'w'] : ['w', 'f'])[lr],
               group,
+              left_right: lr,
             });
             $magpie.nextScreen()" />
           </template>
