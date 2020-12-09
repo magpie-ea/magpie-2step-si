@@ -3,7 +3,6 @@
   Set your experiment id here and
   Define your data sources with the trials attribute -->
   <Experiment
-    id="test1234"
     :trials="{
       training,
       test,
