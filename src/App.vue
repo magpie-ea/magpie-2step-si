@@ -66,38 +66,12 @@
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
       <template v-for="i in 2">
-        <CategorizationMousetracking :key="'training-' + i">
-          <template #option1>
-            <div class="optionBox">
-            {{lr === 0? 'f' : 'w' }}
-            </div>
-          </template>
-          <template #option2>
-            <div class="optionBox">
-            {{lr === 0? 'w' : 'f' }}
-            </div>
-          </template>
-          <template #stimulus>
-            <Rsvp :chunks="$magpie.currentTrial.training.stimulus.split(' ')" @end="$magpie.startMouseTracking()" />
-          </template>
-          <template #feedback="{mouseTrack, label}">
-            <p v-if="$magpie.currentTrial.training.type !== 'Some critical'">
-              {{ (label === 'left'? ['f', 'w'] : ['w', 'f'])[lr] === $magpie.currentTrial.training['correct.response']? 'korrekt' : 'inkorrekt'}}
-            </p>
-            <p v-else>
-              {{(label === 'left'? ['f', 'w'] : ['w', 'f'])[lr] === ['w', 'f'][group]? 'korrekt' : 'inkorrekt' }}
-            </p>
-            <Wait :time="500" @done="$magpie.addResult({
-              ...$magpie.currentTrial.training,
-              ...mouseTrack,
-              response: (label === 'left'? ['f', 'w'] : ['w', 'f'])[lr],
-              group: group == 0? 'semantic' : 'pragmatic',
-              left_box_is_option: lr === 0? 'falsch' : 'wahr' ,
-            });
-            $magpie.nextScreen()" />
-          </template>
-
-        </CategorizationMousetracking>
+        <TrialScreen
+          :key="'training-' + i"
+          :sentence="$magpie.currentTrial.training.stimulus"
+          :group="groupName"
+          :correctResponse="getCorrectResponse()"
+          :trueIsLeft="lr === 1" />
       </template>
       
       <Screen :title="'Kurze Pause!'">
@@ -106,31 +80,11 @@
       </Screen>
       
       <template v-for="i in 2">
-        <CategorizationMousetracking :key="'test-' + i">
-          <template #option1>
-            <div class="optionBox">
-            {{lr === 0? 'f' : 'w' }}
-            </div>
-          </template>
-          <template #option2>
-            <div class="optionBox">
-            {{lr === 0? 'w' : 'f' }}
-            </div>
-          </template>
-          <template #stimulus>
-            <Rsvp :chunks="$magpie.currentTrial.test.stimulus.split(' ')" @end="$magpie.startMouseTracking()" />
-          </template>
-          <template #feedback="{mouseTrack, label}">
-            <Wait :time="500" @done="$magpie.addResult({
-              ...$magpie.currentTrial.test,
-              ...mouseTrack,
-              response: (label === 'left'? ['f', 'w'] : ['w', 'f'])[lr],
-              group: group == 0? 'semantic' : 'pragmatic',
-              left_box_is_option: lr === 0? 'falsch' : 'wahr' ,
-            });
-            $magpie.nextScreen()" />
-          </template>
-        </CategorizationMousetracking>
+        <TrialScreen
+          :key="'test-' + i"
+          :sentence="$magpie.currentTrial.test.stimulus"
+          :group="groupName"
+          :trueIsLeft="lr === 1" />
       </template>
 
       <DebugResults />
@@ -150,9 +104,11 @@
 import test from '../trials/test.csv';
 import training from '../trials/training.csv';
 import _ from 'lodash';
+import TrialScreen from './TrialScreen.vue';
 
 export default {
   name: 'App',
+  components: { TrialScreen },
   data() {
     console.log(training)
     const group = Math.round(Math.random())
@@ -165,15 +121,21 @@ export default {
       training: _.shuffle(training),
       training_length: training.length,
     };
+  },
+  computed: {
+    groupName() {
+      return this.group === 0? 'semantic' : 'pragmatic' 
+    },
+    groupCorrectResponse() {
+      return this.group === 0 ? 'w' : 'f'
+    }
+  },
+  methods: {
+    getCorrectResponse() {
+      return this.$magpie.currentTrial.training.type !== 'Some critical'
+        ? this.$magpie.currentTrial.training['correct.response']
+        : this.groupCorrectResponse
+    }
   }
 };
 </script>
-<style>
-.optionBox {
-  width: 60px;
-  height: 60px;
-  box-sizing: border-box;
-  padding: 20px;
-  background-color: lightyellow;
-}
-</style>
