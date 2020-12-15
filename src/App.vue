@@ -68,10 +68,14 @@
       <template v-for="i in 2">
         <CategorizationMousetracking :key="'training-' + i">
           <template #option1>
+            <div class="optionBox">
             {{lr === 0? 'f' : 'w' }}
+            </div>
           </template>
           <template #option2>
+            <div class="optionBox">
             {{lr === 0? 'w' : 'f' }}
+            </div>
           </template>
           <template #stimulus>
             <Rsvp :chunks="$magpie.currentTrial.training.stimulus.split(' ')" @end="$magpie.startMouseTracking()" />
@@ -104,10 +108,14 @@
       <template v-for="i in 2">
         <CategorizationMousetracking :key="'test-' + i">
           <template #option1>
+            <div class="optionBox">
             {{lr === 0? 'f' : 'w' }}
+            </div>
           </template>
           <template #option2>
+            <div class="optionBox">
             {{lr === 0? 'w' : 'f' }}
+            </div>
           </template>
           <template #stimulus>
             <Rsvp :chunks="$magpie.currentTrial.test.stimulus.split(' ')" @end="$magpie.startMouseTracking()" />
@@ -160,3 +168,12 @@ export default {
   }
 };
 </script>
+<style>
+.optionBox {
+  width: 60px;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: lightyellow;
+}
+</style>
