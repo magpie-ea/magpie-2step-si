@@ -11,7 +11,9 @@
       </div>
     </template>
     <template #stimulus>
-      <Rsvp :chunks="sentence.split(' ')" @end="$magpie.startMouseTracking()" />
+      <Rsvp :chunks="sentence.split(' ')" @end="$magpie.startMouseTracking(); rsvpDone = true" />
+      <Wait v-if="rsvpDone" :time="500" key="warning" @done="displayWarning = $magpie.mousetrackingTime.length <= 1? true : false" />
+      <strong style="color: red;" v-if="displayWarning">!!!</strong>
     </template>
     <template #feedback="{mouseTrack, label}">
       <p v-if="correctResponse">
@@ -48,6 +50,12 @@ export default {
     group: {
       type: String,
       required: true,
+    }
+  },
+  data() {
+    return {
+      displayWarning: false,
+      rsvpDone: false,
     }
   },
   computed: {
