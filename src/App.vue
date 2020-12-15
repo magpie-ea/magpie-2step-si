@@ -15,7 +15,7 @@
 
     <!-- The contents of the #screens template slot define your experiment -->
     <template #screens>
-      <Screen :title="'Probandeninformation zur Studie “2Step-SI”'"> 
+      <Screen :title="'Probandeninformation zur Studie “2Step-SI”'" class="instructions"> 
         <p>Sie   beteiligen   sich   an   einer   psycholinguistischen   Studie   des   Instituts   für Kognitionswissenschaft  der  Universität  Osnabrück,  Fachgebiet  Kognitive  Modellierung, Projektleitung Prof. Dr. Michael Franke.</p>
         <h2>Hintergrund und Ziel der Studie</h2>
         <p>In der vorliegenden Studie soll untersucht werden, wie Sprachinterpretation in kurzer Zeit und womöglich unbewusst zustande kommt.
@@ -43,7 +43,7 @@
         <button @click="$magpie.nextScreen">Studie beginnen</button>
       </Screen>
 
-      <Screen :title="'Instruktionen'">
+      <Screen :title="'Instruktionen'" class="instructions">
         <p>Bitte lesen Sie diese Instruktionen aufmerksam durch und versuchen Sie, diese während des Experimentverlaufs so nah wie möglich zu befolgen.</p>
         <h3>Ablauf</h3>
         <p>Bitte  bewegen  Sie  zu  Beginn  eines  jeden  Durchgangs  den  Mauszeiger  zum  Startpunkt. Dies  ist  der blaue Knopf mit dem Label "GO" am unteren Bildschirmrand.  Sie  starten  jeden  Durchgang selbst,  indem  Sie  den  Startknopf  anklicken.  Pro  Durchgang  wird  Ihnen  ein  kurzer  Satz Wort für Wort angezeigt. Am oberen Bildschirmrand sehen Sie zwei Antwortflächen, je eine für  »wahr«  (w)  und  eine  für  »falsch«  (f).  Bitte klicken  Sie  zügig  auf  die  richtige Antwortfläche,  je  nachdem,  ob  Sie  einen  wahren  oder  einen  falschen  Satz  gelesen haben.</p>
@@ -139,3 +139,8 @@ export default {
   }
 };
 </script>
+<style>
+.instructions {
+  text-align: left;
+}
+</style>
