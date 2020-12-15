@@ -1,5 +1,5 @@
 <template>
-  <CategorizationMousetracking>
+  <CategorizationMousetracking :selectEvent="'click'">
     <template #option1>
       <div class="optionBox">
       {{ leftOption }}
