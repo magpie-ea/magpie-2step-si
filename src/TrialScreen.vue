@@ -1,35 +1,38 @@
 <template>
-  <CategorizationMousetracking :selectEvent="'click'">
-    <template #option1>
-      <div class="optionBox">
-      {{ leftOption }}
-      </div>
+  <Screen>
+    <template #0="{ responses }">
+      <CategorizationMousetracking :selectEvent="'click'" :response.sync="responses.response" :mouseTrack.sync="responses.mouseTrack">
+        <template #option1>
+          <div class="optionBox">
+          {{ leftOption }}
+          </div>
+        </template>
+        <template #option2>
+          <div class="optionBox">
+          {{ rightOption }}
+          </div>
+        </template>
+        <template #stimulus>
+          <Rsvp :chunks="sentence.split(' ')" @end="$magpie.startMouseTracking(); rsvpDone = true" />
+          <Wait v-if="rsvpDone" :time="500" key="warning" @done="displayWarning = $magpie.mousetrackingTime.length <= 1? true : false" />
+          <strong style="color: red;" v-if="displayWarning">!!!</strong>
+        </template>
+        <template #feedback>
+          <p v-if="correctResponse">
+            {{ (label === 'left'? leftOption : rightOption) == correctResponse? 'korrekt' : 'inkorrekt'}}
+          </p>
+          <Wait :time="500" @done="$magpie.addResult({
+            ...$magpie.currentTrial.training,
+            ...responses.mouseTrack,
+            response: (responses.response === 'left'? leftOption : rightOption),
+            group,
+            left_box_is_option: !trueIsLeft? 'falsch' : 'wahr',
+          });
+          $magpie.nextScreen()" />
+        </template>
+      </CategorizationMousetracking>
     </template>
-    <template #option2>
-      <div class="optionBox">
-      {{ rightOption }}
-      </div>
-    </template>
-    <template #stimulus>
-      <Rsvp :chunks="sentence.split(' ')" @end="$magpie.startMouseTracking(); rsvpDone = true" />
-      <Wait v-if="rsvpDone" :time="500" key="warning" @done="displayWarning = $magpie.mousetrackingTime.length <= 1? true : false" />
-      <strong style="color: red;" v-if="displayWarning">!!!</strong>
-    </template>
-    <template #feedback="{mouseTrack, label}">
-      <p v-if="correctResponse">
-        {{ (label === 'left'? leftOption : rightOption) == correctResponse? 'korrekt' : 'inkorrekt'}}
-      </p>
-      <Wait :time="500" @done="$magpie.addResult({
-        ...$magpie.currentTrial.training,
-        ...mouseTrack,
-        response: (label === 'left'? leftOption : rightOption),
-        group,
-        left_box_is_option: !trueIsLeft? 'falsch' : 'wahr',
-      });
-      $magpie.nextScreen()" />
-    </template>
-
-  </CategorizationMousetracking>
+  </Screen>
 </template>
 <script>
 export default {
