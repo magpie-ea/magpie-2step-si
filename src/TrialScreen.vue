@@ -1,5 +1,5 @@
 <template>
-  <Screen>
+  <Screen :progress="progress">
     <template #0="{ responses }">
       <CategorizationMousetracking :selectEvent="'click'" :response.sync="responses.response" :mouseTrack.sync="responses.mouseTrack">
         <template #option1>
@@ -52,6 +52,10 @@ export default {
     },
     group: {
       type: String,
+      required: true,
+    },
+    progress: {
+      type: Number,
       required: true,
     }
   },

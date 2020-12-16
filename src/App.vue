@@ -71,7 +71,8 @@
           :sentence="$magpie.currentTrial.training.stimulus"
           :group="groupName"
           :correctResponse="getCorrectResponse()"
-          :trueIsLeft="lr === 1" />
+          :trueIsLeft="lr === 1"
+          :progress="i/2" />
       </template>
       
       <Screen :title="'Kurze Pause!'">
@@ -84,7 +85,8 @@
           :key="'test-' + i"
           :sentence="$magpie.currentTrial.test.stimulus"
           :group="groupName"
-          :trueIsLeft="lr === 1" />
+          :trueIsLeft="lr === 1"
+          :progress="i/2" />
       </template>
 
       <DebugResults />
