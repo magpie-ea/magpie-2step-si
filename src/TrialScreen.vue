@@ -36,7 +36,8 @@
         <template #feedback>
           <p v-if="correctResponse" class="feedback">
             {{
-              (label === 'left' ? leftOption : rightOption) === correctResponse
+              (responses.response === 'left' ? leftOption : rightOption) ===
+              correctResponse
                 ? 'korrekt'
                 : 'inkorrekt'
             }}
@@ -45,8 +46,8 @@
             :time="1000"
             @done="
               $magpie.addResult({
-                trial_type,
-                trial_number,
+                trialType,
+                trialNumber,
                 ...$magpie.currentTrial.training,
                 ...responses.mouseTrack,
                 response:
