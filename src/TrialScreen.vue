@@ -13,15 +13,17 @@
           </div>
         </template>
         <template #stimulus>
-          <Rsvp :chunks="sentence.split(' ')" @end="$magpie.startMouseTracking(); rsvpDone = true" />
+          <Rsvp style="font-size:40px;" :chunks="sentence.split(' ')" @end="$magpie.startMouseTracking(); rsvpDone = true" />
           <Wait v-if="rsvpDone" :time="500" key="warning" @done="displayWarning = $magpie.mousetrackingTime.length <= 1? true : false" />
-          <strong style="color: red;" v-if="displayWarning">!!!</strong>
+          <strong style="color: darkred; font-size:100px;" v-if="displayWarning">!!!</strong>
         </template>
         <template #feedback>
-          <p v-if="correctResponse">
+          <p v-if="correctResponse" style="font-size:50px;">
             {{ (label === 'left'? leftOption : rightOption) == correctResponse? 'korrekt' : 'inkorrekt'}}
           </p>
-          <Wait :time="500" @done="$magpie.addResult({
+          <Wait :time="1000" @done="$magpie.addResult({
+            trial_type,
+            trial_number,
             ...$magpie.currentTrial.training,
             ...responses.mouseTrack,
             response: (responses.response === 'left'? leftOption : rightOption),
@@ -38,6 +40,14 @@
 export default {
   name: 'TrialScreen',
   props: {
+    trial_type: {
+      type: String,
+      required: true,
+    },
+    trial_number: {
+      type: Number,
+      required: true,
+    },
     sentence: {
       type: String,
       required: true,
@@ -77,10 +87,11 @@ export default {
 </script>
 <style>
 .optionBox {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   box-sizing: border-box;
-  padding: 20px;
-  background-color: lightyellow;
+  padding: 30px;
+  background-color: lightgray;
+  font-size: 30px;
 }
 </style>
