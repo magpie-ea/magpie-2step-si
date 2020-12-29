@@ -3,6 +3,7 @@
   Set your experiment id here and
   Define your data sources with the trials attribute -->
   <Experiment
+    title="2Step-SI Online Studie"
     :trials="{
       training,
       test
