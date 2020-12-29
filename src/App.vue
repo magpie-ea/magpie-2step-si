@@ -78,7 +78,7 @@
 
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
-      <template v-for="i in 3">
+      <template v-for="i in 5">
         <TrialScreen
           :key="'training-' + i"
           :trial_type="'training'"
@@ -95,7 +95,7 @@
         <button @click="$magpie.nextScreen">Zum Hauptteil des Experiments</button>
       </Screen>
       
-      <template v-for="i in 1">
+      <template v-for="i in 5">
         <TrialScreen
           :key="'test-' + i"
           :trial_type="'main'"
