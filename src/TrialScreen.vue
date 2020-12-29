@@ -34,7 +34,17 @@
           <span v-if="displayWarning" class="exclamation-points">!!!</span>
         </template>
         <template #feedback>
-          <p v-if="correctResponse" class="feedback">
+          <p
+            v-if="correctResponse"
+            class="feedback"
+            :style="{
+              color:
+                (responses.response === 'left' ? leftOption : rightOption) ===
+                correctResponse
+                  ? 'green'
+                  : 'red'
+            }"
+          >
             {{
               (responses.response === 'left' ? leftOption : rightOption) ===
               correctResponse
