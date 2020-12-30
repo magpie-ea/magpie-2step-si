@@ -198,8 +198,6 @@
           beispielsweise Ihren Arm neu zu positionieren oder einfach kurz
           durchzuatmen.
         </p>
-        <br />
-        <br />
         <h3>Auf einen Blick:</h3>
         <ul>
           <li>
