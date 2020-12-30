@@ -136,7 +136,12 @@
         class="instructions"
       >
         <strong>Vorschlag von MF:</strong>
-        <p>Schalten sie das Experiment auf Fullscreen (wie macht man das?).</p>
+        <p>
+          Schalten sie das Experiment auf Fullscreen:
+          <a href="javascript:void(0)" @click="turnOnFullScreen"
+            >Auf Fullscreen umschalten</a
+          >
+        </p>
         <p>Benutzen Sie eine Maus.</p>
         <p>
           Schaffen Sie sich Platz für die Mausbewegung. Sie sollten den
@@ -338,6 +343,20 @@ export default {
       return this.$magpie.currentTrial.training.type !== 'Some critical'
         ? this.$magpie.currentTrial.training['correct.response']
         : this.groupCorrectResponse;
+    },
+    async turnOnFullScreen() {
+      if (!document.fullscreenElement) {
+        try {
+          await document.documentElement.requestFullscreen();
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+      return true;
+    },
+    turnOffFullScreen() {
+      document.exitFullscreen();
     }
   }
 };

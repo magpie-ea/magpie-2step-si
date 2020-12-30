@@ -64,8 +64,8 @@
                   responses.response === 'left' ? leftOption : rightOption,
                 group,
                 left_box_is_option: !trueIsLeft ? 'falsch' : 'wahr',
-                window_inner_height: window.innerHeight,
-                window_inner_width: window.innerWidth
+                window_inner_height,
+                window_inner_width
               });
               $magpie.nextScreen();
             "
@@ -111,7 +111,9 @@ export default {
   data() {
     return {
       displayWarning: false,
-      rsvpDone: false
+      rsvpDone: false,
+      window_inner_width: window.innerWidth,
+      window_inner_height: window.innerHeight
     };
   },
   computed: {
