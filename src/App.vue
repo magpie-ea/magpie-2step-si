@@ -224,6 +224,36 @@
         <button @click="$magpie.nextScreen">Trainingsphase starten</button>
       </Screen>
 
+      <!-- Measure mouse speed -->
+      <Screen>
+        <template #0="{ responses }">
+          <CategorizationMousetracking :select-event="'mouseover'">
+            <template #option1>
+              <div class="optionBox">
+                w
+              </div>
+            </template>
+            <template #option2>
+              <div class="optionBox">
+                f
+              </div>
+            </template>
+            <template #stimulus>
+              <Timer key="mouse-time" v-model="responses.timer" />
+            </template>
+            <template #feedback>
+              <Wait
+                :time="0"
+                @done="
+                  mouse_speed_time = responses.timer();
+                  $magpie.nextScreen();
+                "
+              />
+            </template>
+          </CategorizationMousetracking>
+        </template>
+      </Screen>
+
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
       <template v-for="i in 5">
@@ -291,7 +321,8 @@ export default {
       test: _.shuffle(test),
       test_length: test.length,
       training: _.shuffle(training),
-      training_length: training.length
+      training_length: training.length,
+      mouse_speed_time: 0
     };
   },
   computed: {
