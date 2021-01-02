@@ -65,7 +65,8 @@
                 group,
                 left_box_is_option: !trueIsLeft ? 'falsch' : 'wahr',
                 window_inner_height,
-                window_inner_width
+                window_inner_width,
+                reaction_too_slow: displayWarning
               });
               $magpie.nextScreen();
             "
