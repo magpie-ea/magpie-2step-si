@@ -20,16 +20,17 @@
           <Rsvp
             class="rsvp"
             :chunks="sentence.split(' ')"
-            @end="
-              $magpie.startMouseTracking();
-              rsvpDone = true;
-            "
+            @end="rsvpDone = true"
           />
           <Wait
             v-if="rsvpDone"
             key="warning"
             :time="500"
             @done="displayWarning = $magpie.mousetrackingTime.length <= 1"
+          /><Wait
+            key="mt-start"
+            :time="0"
+            @done="$magpie.startMouseTracking()"
           />
           <span v-if="displayWarning" class="exclamation-points">!!!</span>
         </template>
