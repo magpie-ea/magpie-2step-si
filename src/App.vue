@@ -15,6 +15,7 @@
       <div></div>
     </template>
 
+
     <!-- The contents of the #screens template slot define your experiment -->
     <template #screens>
       <Screen
@@ -130,33 +131,57 @@
         <!-- The $magpie field gives you access to magpie-specific functionality -->
         <button @click="$magpie.nextScreen">Weiter</button>
       </Screen>
+ 
 
       <Screen
         :title="'Hinweise zur Durchführung dieses Versuchs'"
         class="instructions"
       >
-        <strong>Vorschlag von MF:</strong>
         <p>
-          Schalten sie das Experiment auf Fullscreen:
+          Bitte benutzen Sie für die Dauer des Experimentes den "Fullscreen Modus":
           <a href="javascript:void(0)" @click="turnOnFullScreen"
             >Auf Fullscreen umschalten</a
           >
         </p>
-        <p>Benutzen Sie eine Maus.</p>
+        <p>Benutzen Sie eine Maus oder ein Trackpad.</p>
         <p>
-          Schaffen Sie sich Platz für die Mausbewegung. Sie sollten den
-          Mauszeiger in einer Bewegung ohne Abheben der Maus von der unteren zur
-          oberen Bildschirmkannte bewegen können.
+          Wenn Sie eine Maus benutzen, schaffen Sie sich Platz für die Mausbewegung. 
+          Sie sollten den Mauszeiger in einer Bewegung ohne Abheben der Maus von der 
+          unteren zur oberen Bildschirmkannte bewegen können.
         </p>
         <p>
-          Wenn Sie können, wären wir Ihnen dankbar, wenn Sie die Geschwindigkeit
-          der Maus in Ihren Systemeinstellungen verlangsamen könnten, so dass es
-          Ihnen gerade noch mühelos gelingt, in einer Armbewegung den Mauszeiger
-          von der unteren zur oberen Bildschirmkante zu bewegen.
+          Als nächstes folgen einige Probedurchgänge zur Benutzung von Maus oder Trackpad. 
+          Bitte folgen Sie den Anweisungen auf dem Bildschirm.
         </p>
         <br />
         <!-- The $magpie field gives you access to magpie-specific functionality -->
         <button @click="$magpie.nextScreen">Weiter</button>
+      </Screen>
+
+
+      <Screen>
+        <template #0="{ responses }">
+          Klicken Sie auf "go" und bewegen Sie die Maus so schnell wie möglich in einer geraden Linie auf die graue Box.
+          <CategorizationMousetracking :select-event="'mouseover'">
+            <template #option1>
+              <div class="optionBox">
+                X
+              </div>
+            </template>
+            <template #stimulus>
+              <Timer key="mouse-time" v-model="responses.timer" />
+            </template>
+            <template #feedback>
+              <Wait
+                :time="0"
+                @done="
+                  mouse_speed_time = responses.timer();
+                  $magpie.nextScreen();
+                "
+              />
+            </template>
+          </CategorizationMousetracking>
+        </template>
       </Screen>
 
       <Screen :title="'Instruktionen'" class="instructions">
@@ -229,36 +254,6 @@
         <button @click="$magpie.nextScreen">Trainingsphase starten</button>
       </Screen>
 
-      <!-- Measure mouse speed -->
-      <Screen>
-        <template #0="{ responses }">
-          <CategorizationMousetracking :select-event="'mouseover'">
-            <template #option1>
-              <div class="optionBox">
-                w
-              </div>
-            </template>
-            <template #option2>
-              <div class="optionBox">
-                f
-              </div>
-            </template>
-            <template #stimulus>
-              <Timer key="mouse-time" v-model="responses.timer" />
-            </template>
-            <template #feedback>
-              <Wait
-                :time="0"
-                @done="
-                  mouse_speed_time = responses.timer();
-                  $magpie.nextScreen();
-                "
-              />
-            </template>
-          </CategorizationMousetracking>
-        </template>
-      </Screen>
-
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
       <template v-for="i in 5">
@@ -293,6 +288,15 @@
           :progress="(i - 1) / 5"
         />
       </template>
+
+      <Screen>
+        <template #0="{responses}">
+          <p>What did you use to complete this task?</p>
+          <ForcedChoiceInput
+              :response.sync="responses.inputmethod"
+              :options="['Mouse', 'Trackpad', 'both', ]" />
+        </template>
+      </Screen>
 
       <DebugResults />
 

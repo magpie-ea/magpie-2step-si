@@ -2,7 +2,7 @@
   <Screen :progress="progress">
     <template #0="{ responses }">
       <CategorizationMousetracking
-        :select-event="'click'"
+        :select-event="'mouseover'"
         :response.sync="responses.response"
         :mouse-track.sync="responses.mouseTrack"
       >
