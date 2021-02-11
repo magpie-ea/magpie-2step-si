@@ -15,7 +15,6 @@
       <div></div>
     </template>
 
-
     <!-- The contents of the #screens template slot define your experiment -->
     <template #screens>
       <Screen
@@ -131,58 +130,82 @@
         <!-- The $magpie field gives you access to magpie-specific functionality -->
         <button @click="$magpie.nextScreen">Weiter</button>
       </Screen>
- 
 
       <Screen
         :title="'Hinweise zur Durchführung dieses Versuchs'"
         class="instructions"
       >
         <p>
-          Bitte benutzen Sie für die Dauer des Experimentes den "Fullscreen Modus":
+          Bitte benutzen Sie für die Dauer des Experimentes den "Fullscreen
+          Modus":
           <a href="javascript:void(0)" @click="turnOnFullScreen"
             >Auf Fullscreen umschalten</a
           >
         </p>
         <p>Benutzen Sie eine Maus oder ein Trackpad.</p>
         <p>
-          Wenn Sie eine Maus benutzen, schaffen Sie sich Platz für die Mausbewegung. 
-          Sie sollten den Mauszeiger in einer Bewegung ohne Abheben der Maus von der 
-          unteren zur oberen Bildschirmkannte bewegen können.
+          Wenn Sie eine Maus benutzen, schaffen Sie sich Platz für die
+          Mausbewegung. Sie sollten den Mauszeiger in einer Bewegung ohne
+          Abheben der Maus von der unteren zur oberen Bildschirmkannte bewegen
+          können.
         </p>
         <p>
-          Als nächstes folgen einige Probedurchgänge zur Benutzung von Maus oder Trackpad. 
-          Bitte folgen Sie den Anweisungen auf dem Bildschirm.
+          Als nächstes folgen einige Probedurchgänge zur Benutzung von Maus oder
+          Trackpad. Bitte folgen Sie den Anweisungen auf dem Bildschirm.
         </p>
         <br />
         <!-- The $magpie field gives you access to magpie-specific functionality -->
         <button @click="$magpie.nextScreen">Weiter</button>
       </Screen>
 
-
-      <Screen>
-        <template #0="{ responses }">
-          Klicken Sie auf "go" und bewegen Sie die Maus so schnell wie möglich in einer geraden Linie auf die graue Box.
-          <CategorizationMousetracking :select-event="'mouseover'">
-            <template #option1>
-              <div class="optionBox">
-                X
-              </div>
-            </template>
-            <template #stimulus>
-              <Timer key="mouse-time" v-model="responses.timer" />
-            </template>
-            <template #feedback>
-              <Wait
-                :time="0"
-                @done="
-                  mouse_speed_time = responses.timer();
-                  $magpie.nextScreen();
-                "
-              />
-            </template>
-          </CategorizationMousetracking>
-        </template>
-      </Screen>
+      <template v-for="i in 6">
+        <Screen :key="'mouse_speed_test-' + i">
+          <template #0="{ responses }">
+            Klicken Sie auf "go" und bewegen Sie die Maus so schnell wie möglich
+            in einer geraden Linie auf die graue Box.
+            <CategorizationMousetracking
+              :select-event="'mouseover'"
+              :mouse-track.sync="responses.mouseTrack"
+            >
+              <template #option1>
+                <div v-if="i % 2 === 0" class="optionBox">
+                  X
+                </div>
+              </template>
+              <template #option2>
+                <div v-if="i % 2 === 1" class="optionBox">
+                  X
+                </div>
+              </template>
+              <template #stimulus>
+                <Timer key="mouse-time" v-model="responses.timer" />
+                <Wait
+                  key="mt-start"
+                  :time="0"
+                  @done="$magpie.startMouseTracking()"
+                />
+              </template>
+              <template #feedback>
+                <Wait
+                  :time="0"
+                  @done="
+                    $magpie.addResult({
+                      trialType: 'mouse-speed-test',
+                      trialNumber: i,
+                      ...$magpie.currentTrial.training,
+                      ...responses.mouseTrack,
+                      ...getScreenDimensions(),
+                      position: i % 2 === 0 ? 'left' : 'right',
+                      mouse_speed_time: responses.timer()
+                    });
+                    $magpie.nextScreen();
+                  "
+                />
+              </template>
+            </CategorizationMousetracking>
+          </template>
+        </Screen>
+      </template>
 
       <Screen :title="'Instruktionen'" class="instructions">
         <p>
@@ -293,8 +316,9 @@
         <template #0="{responses}">
           <p>What did you use to complete this task?</p>
           <ForcedChoiceInput
-              :response.sync="responses.inputmethod"
-              :options="['Mouse', 'Trackpad', 'both', ]" />
+            :response.sync="responses.inputmethod"
+            :options="['Mouse', 'Trackpad', 'both']"
+          />
         </template>
       </Screen>
 
@@ -330,8 +354,7 @@ export default {
       test: _.shuffle(test),
       test_length: test.length,
       training: _.shuffle(training),
-      training_length: training.length,
-      mouse_speed_time: 0
+      training_length: training.length
     };
   },
   computed: {
@@ -361,6 +384,12 @@ export default {
     },
     turnOffFullScreen() {
       document.exitFullscreen();
+    },
+    getScreenDimensions() {
+      return {
+        window_inner_width: window.innerWidth,
+        window_inner_height: window.innerHeight
+      };
     }
   }
 };
