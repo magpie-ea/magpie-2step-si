@@ -1,5 +1,5 @@
 <template>
-  <Screen :progress="progress">
+  <Screen :progress="progress" class="trial">
     <template #0="{ responses }">
       <CategorizationMousetracking
         :select-event="'mouseover'"
@@ -7,12 +7,12 @@
         :mouse-track.sync="responses.mouseTrack"
       >
         <template #option1>
-          <div class="optionBox">
+          <div class="optionBox left">
             {{ leftOption }}
           </div>
         </template>
         <template #option2>
-          <div class="optionBox">
+          <div class="optionBox right">
             {{ rightOption }}
           </div>
         </template>
@@ -136,6 +136,17 @@ export default {
   padding: 30px;
   background-color: lightgray;
   font-size: 30px;
+  position: absolute;
+  top: -29px;
+}
+.trial .optionBox {
+  top: -49px;
+}
+.optionBox.left {
+  left: -29px;
+}
+.optionBox.right {
+  right: -29px;
 }
 
 .rsvp {

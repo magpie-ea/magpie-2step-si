@@ -64,12 +64,12 @@
               :mouse-track.sync="responses.mouseTrack"
             >
               <template #option1>
-                <div v-if="i % 2 === 0" class="optionBox">
+                <div v-if="i % 2 === 0" class="optionBox left">
                   X
                 </div>
               </template>
               <template #option2>
-                <div v-if="i % 2 === 1" class="optionBox">
+                <div v-if="i % 2 === 1" class="optionBox right">
                   X
                 </div>
               </template>
@@ -143,13 +143,76 @@
         />
       </template>
 
-      <Screen>
+      <Screen key="input_method">
         <template #0="{responses}">
           <p>What did you use to complete this task?</p>
           <ForcedChoiceInput
             :response.sync="responses.inputmethod"
             :options="['Mouse', 'Trackpad', 'both']"
+            @update:response="
+              $magpie.addResult({ input_method: $event });
+              $magpie.nextScreen();
+            "
           />
+        </template>
+      </Screen>
+
+      <Screen key="additional-information" title="Additional information">
+        <template #0="{responses}">
+          <p>
+            Answering the following questions is optional, but your answers will
+            help us analyze our results.
+          </p>
+          <div style="text-align: left; width: 200px; margin: 0 auto;">
+            <p>
+              <label
+                >Age
+                <input v-model="responses.age" type="number" max="110" min="18"
+              /></label>
+            </p>
+            <p>
+              <label
+                >Gender
+                <select v-model="responses.gender"
+                  ><option value="male">male</option>
+                  <option value="female">female</option>
+                  <option value="other">other</option></select
+                ></label
+              >
+            </p>
+            <p>
+              <label
+                >Level of Eduction
+                <select v-model="responses.education"
+                  ><option value="Graduated Highschool"
+                    >Graduated Highschool</option
+                  >
+                  <option value="Graduated College">Graduated College</option>
+                  <option value="Higher degree">Higher degree</option></select
+                ></label
+              >
+            </p>
+            <p>
+              <label
+                >Native langauges
+                <input
+                  v-model="responses.languages"
+                  type="text"
+                  placeholder="the langauge(s) spoken at home when you were a child"
+              /></label>
+            </p>
+            Further comments
+            <TextareaInput :response.sync="responses.education"></TextareaInput>
+          </div>
+
+          <button
+            @click="
+              $magpie.addResult(responses);
+              $magpie.nextScreen();
+            "
+          >
+            Next
+          </button>
         </template>
       </Screen>
 
