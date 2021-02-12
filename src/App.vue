@@ -24,7 +24,7 @@
         <Instructions />
         <br />
         <!-- The $magpie field gives you access to magpie-specific functionality -->
-        <button @click="$magpie.nextScreen">Weiter</button>
+        <button @click="$magpie.nextScreen()">Weiter</button>
       </Screen>
 
       <Screen
@@ -51,7 +51,7 @@
         </p>
         <br />
         <!-- The $magpie field gives you access to magpie-specific functionality -->
-        <button @click="$magpie.nextScreen">Weiter</button>
+        <button @click="$magpie.nextScreen()">Weiter</button>
       </Screen>
 
       <template v-for="i in 6">
@@ -78,7 +78,7 @@
                 <Wait
                   key="mt-start"
                   :time="0"
-                  @done="$magpie.startMouseTracking()"
+                  @done="$magpie.mousetracking.start()"
                 />
               </template>
               <template #feedback>
@@ -105,7 +105,7 @@
 
       <Screen :title="'Instruktionen'" class="instructions">
         <Instructions2 />
-        <button @click="$magpie.nextScreen">Trainingsphase starten</button>
+        <button @click="$magpie.nextScreen()">Trainingsphase starten</button>
       </Screen>
 
       <!-- Practice trials -->
@@ -126,7 +126,7 @@
       <Screen :title="'Kurze Pause!'">
         Das Training ist vorbei. Nehmen Sie sich gerne eine kurze Pause, bevor
         Sie mit dem Hauptteil des Experiments beginnen.
-        <button @click="$magpie.nextScreen">
+        <button @click="$magpie.nextScreen()">
           Zum Hauptteil des Experiments
         </button>
       </Screen>

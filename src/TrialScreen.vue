@@ -26,11 +26,11 @@
             v-if="rsvpDone"
             key="warning"
             :time="500"
-            @done="displayWarning = $magpie.mousetrackingTime.length <= 1"
+            @done="displayWarning = $magpie.mousetracking.time.length <= 1"
           /><Wait
             key="mt-start"
             :time="0"
-            @done="$magpie.startMouseTracking()"
+            @done="$magpie.mousetracking.start()"
           />
           <span v-if="displayWarning" class="exclamation-points">!!!</span>
         </template>
