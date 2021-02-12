@@ -150,7 +150,7 @@
             :response.sync="responses.inputmethod"
             :options="['Mouse', 'Trackpad', 'both', 'neither']"
             @update:response="
-              $magpie.addResult({ input_method: $event });
+              $magpie.addFacts({ input_method: $event });
               $magpie.nextScreen();
             "
           />
@@ -207,7 +207,7 @@
 
           <button
             @click="
-              $magpie.addResult(responses);
+              $magpie.addFacts(responses);
               $magpie.nextScreen();
             "
           >
@@ -260,6 +260,11 @@ export default {
     groupCorrectResponse() {
       return this.group === 0 ? 'w' : 'f';
     }
+  },
+  mounted() {
+    this.$magpie.addFacts({
+      group: this.group
+    });
   },
   methods: {
     getCorrectResponse() {
