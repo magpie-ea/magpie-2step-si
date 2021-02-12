@@ -148,7 +148,7 @@
           <p>What did you use to complete this task?</p>
           <ForcedChoiceInput
             :response.sync="responses.inputmethod"
-            :options="['Mouse', 'Trackpad', 'both']"
+            :options="['Mouse', 'Trackpad', 'both', 'neither']"
             @update:response="
               $magpie.addResult({ input_method: $event });
               $magpie.nextScreen();
@@ -194,7 +194,7 @@
             </p>
             <p>
               <label
-                >Native langauges
+                >Native languages
                 <input
                   v-model="responses.languages"
                   type="text"
