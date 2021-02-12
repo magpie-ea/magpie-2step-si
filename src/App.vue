@@ -202,7 +202,7 @@
               /></label>
             </p>
             Further comments
-            <TextareaInput :response.sync="responses.education"></TextareaInput>
+            <TextareaInput :response.sync="responses.comments"></TextareaInput>
           </div>
 
           <button
