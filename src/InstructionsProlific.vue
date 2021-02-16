@@ -57,18 +57,18 @@
       Sie können Ihre Teilnahme jederzeit und ohne Angabe von Gründen abbrechen.
     </p>
     <p>
-      Alle Daten, die in diesem Experiment erhoben werden, werden völlig anonymisert
-      behandelt. Ihre Daten werden nur zu Forschungszwecken gespeichert und
-      verwertet. Alle Daten werden gemäß den Empfehlungen der
+      Alle Daten, die in diesem Experiment erhoben werden, werden völlig
+      anonymisert behandelt. Ihre Daten werden nur zu Forschungszwecken
+      gespeichert und verwertet. Alle Daten werden gemäß den Empfehlungen der
       Deutschen Forschungsgemeinschaft (DFG) für mindestens 10 Jahre nach der
       Datenerhebung aufbewahrt.
     </p>
     <p>
-      Die anonymen Daten dieser Studie sollen zudem als offene Daten im Internet in
-      einem Datenarchiv (voraussichtlich osf.org) zugänglich gemacht werden. Damit
-      folgt diese Studie den Empfehlungen der Deutschen Forschungsgemeinschaft (DFG) und der
-      Deutschen Gesellschaft für Psychologie (DGPs) zur Qualitätssicherung in
-      der Forschung.
+      Die anonymen Daten dieser Studie sollen zudem als offene Daten im Internet
+      in einem Datenarchiv (voraussichtlich osf.org) zugänglich gemacht werden.
+      Damit folgt diese Studie den Empfehlungen der Deutschen
+      Forschungsgemeinschaft (DFG) und der Deutschen Gesellschaft für
+      Psychologie (DGPs) zur Qualitätssicherung in der Forschung.
     </p>
   </div>
 </template>
