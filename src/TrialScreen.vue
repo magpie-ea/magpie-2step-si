@@ -56,7 +56,7 @@
           <Wait
             :time="1000"
             @done="
-              $magpie.addResult({
+              $magpie.addTrialData({
                 trialType,
                 trialNumber,
                 ...$magpie.currentTrial.training,

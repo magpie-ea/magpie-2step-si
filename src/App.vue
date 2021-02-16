@@ -85,7 +85,7 @@
                 <Wait
                   :time="0"
                   @done="
-                    $magpie.addResult({
+                    $magpie.addTrialData({
                       trialType: 'mouse-speed-test',
                       trialNumber: i,
                       ...responses.mouseTrack,
@@ -149,7 +149,7 @@
             :response.sync="responses.inputmethod"
             :options="['Mouse', 'Trackpad', 'both', 'neither']"
             @update:response="
-              $magpie.addFacts({ input_method: $event });
+              $magpie.addExpData({ input_method: $event });
               $magpie.nextScreen();
             "
           />
@@ -207,7 +207,7 @@
 
           <button
             @click="
-              $magpie.addFacts(responses);
+              $magpie.addExpData(responses);
               $magpie.nextScreen();
             "
           >
@@ -262,7 +262,7 @@ export default {
     }
   },
   mounted() {
-    this.$magpie.addFacts({
+    this.$magpie.addExpData({
       group: this.groupName
     });
   },
