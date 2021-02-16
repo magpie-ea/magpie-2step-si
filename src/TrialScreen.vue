@@ -142,10 +142,10 @@ export default {
   top: -49px;
 }
 .optionBox.left {
-  left: -29px;
+  left: -28px;
 }
 .optionBox.right {
-  right: -29px;
+  right: -28px;
 }
 
 .rsvp {

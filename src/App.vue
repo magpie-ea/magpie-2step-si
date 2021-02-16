@@ -88,7 +88,6 @@
                     $magpie.addResult({
                       trialType: 'mouse-speed-test',
                       trialNumber: i,
-                      ...$magpie.currentTrial.training,
                       ...responses.mouseTrack,
                       ...getScreenDimensions(),
                       position: i % 2 === 0 ? 'left' : 'right',
@@ -263,7 +262,7 @@ export default {
   },
   mounted() {
     this.$magpie.addFacts({
-      group: this.group
+      group: this.groupName
     });
   },
   methods: {
