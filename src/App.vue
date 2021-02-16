@@ -197,7 +197,8 @@
                 <input
                   v-model="responses.languages"
                   type="text"
-                  placeholder="the langauge(s) spoken at home when you were a child"
+                  placeholder="langauge(s) spoken at home when you were a child"
+                  style="width: 400px;"
               /></label>
             </p>
             Further comments
