@@ -234,7 +234,7 @@ import test from '../trials/test.csv';
 import training from '../trials/training.csv';
 import _ from 'lodash';
 import TrialScreen from './TrialScreen.vue';
-import Instructions from './Instructions';
+import Instructions from './InstructionsProlific';
 import Instructions2 from './Instructions2';
 
 export default {
