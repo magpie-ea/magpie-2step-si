@@ -109,7 +109,7 @@
 
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
-      <template v-for="i in 5">
+      <template v-for="i in 50">
         <TrialScreen
           :key="'training-' + i"
           :trial-type="'training'"
@@ -130,7 +130,7 @@
         </button>
       </Screen>
 
-      <template v-for="i in 5">
+      <template v-for="i in 90">
         <TrialScreen
           :key="'test-' + i"
           :trial-type="'main'"
