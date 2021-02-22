@@ -59,7 +59,7 @@
               $magpie.addTrialData({
                 trialType,
                 trialNumber,
-                ...$magpie.currentTrial.training,
+                ...trialData,
                 ...responses.mouseTrack,
                 response:
                   responses.response === 'left' ? leftOption : rightOption,
@@ -80,6 +80,10 @@
 export default {
   name: 'TrialScreen',
   props: {
+    trialData: {
+      type: Object,
+      required: true
+    },
     trialType: {
       type: String,
       required: true

@@ -57,10 +57,10 @@
       <template v-for="i in 6">
         <Screen :key="'mouse_speed_test-' + i">
           <template #0="{ responses }">
-            Klicken Sie auf "go" und bewegen Sie den Mauszeiger so schnell wie möglich
-            in einer geraden Linie auf die graue Box.<br>
-            Versuchen Sie die Bewegung auszuführen, ohne die Bewegung durch Abheben 
-            der Maus oder des Fingers zu unterbrechen.
+            Klicken Sie auf "go" und bewegen Sie den Mauszeiger so schnell wie
+            möglich in einer geraden Linie auf die graue Box.<br />
+            Versuchen Sie die Bewegung auszuführen, ohne die Bewegung durch
+            Abheben der Maus oder des Fingers zu unterbrechen.
             <CategorizationMousetracking
               :select-event="'mouseover'"
               :mouse-track.sync="responses.mouseTrack"
@@ -116,6 +116,7 @@
           :key="'training-' + i"
           :trial-type="'training'"
           :trial-number="i"
+          :trial-data="$magpie.currentTrial.training"
           :sentence="$magpie.currentTrial.training.stimulus"
           :group="groupName"
           :correct-response="getCorrectResponse()"
@@ -137,6 +138,7 @@
           :key="'test-' + i"
           :trial-type="'main'"
           :trial-number="i"
+          :trial-data="$magpie.currentTrial.test"
           :sentence="$magpie.currentTrial.test.stimulus"
           :group="groupName"
           :true-is-left="lr === 1"
