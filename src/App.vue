@@ -6,7 +6,7 @@
     title="2Step-SI Online Studie"
     :trials="{
       training,
-      test
+      main: test
     }"
     :wide="true"
   >
@@ -116,10 +116,7 @@
           :key="'training-' + i"
           :trial-type="'training'"
           :trial-number="i"
-          :trial-data="$magpie.currentTrial.training"
-          :sentence="$magpie.currentTrial.training.stimulus"
           :group="groupName"
-          :correct-response="getCorrectResponse()"
           :true-is-left="lr === 1"
           :progress="(i - 1) / 50"
         />
@@ -138,8 +135,6 @@
           :key="'test-' + i"
           :trial-type="'main'"
           :trial-number="i"
-          :trial-data="$magpie.currentTrial.test"
-          :sentence="$magpie.currentTrial.test.stimulus"
           :group="groupName"
           :true-is-left="lr === 1"
           :progress="(i - 1) / 90"
@@ -271,11 +266,6 @@ export default {
     });
   },
   methods: {
-    getCorrectResponse() {
-      return this.$magpie.currentTrial.training.type !== 'Some critical'
-        ? this.$magpie.currentTrial.training['correct.response']
-        : this.groupCorrectResponse;
-    },
     async turnOnFullScreen() {
       if (!document.fullscreenElement) {
         try {

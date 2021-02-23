@@ -19,7 +19,7 @@
         <template #stimulus>
           <Rsvp
             class="rsvp"
-            :chunks="sentence.split(' ')"
+            :chunks="$magpie.currentTrial[trialType].stimulus.split(' ')"
             @end="rsvpDone = true"
           />
           <Wait
@@ -36,19 +36,19 @@
         </template>
         <template #feedback>
           <p
-            v-if="correctResponse"
+            v-if="trialType === 'training'"
             class="feedback"
             :style="{
               color:
                 (responses.response === 'left' ? leftOption : rightOption) ===
-                correctResponse
+                getCorrectResponse()
                   ? 'green'
                   : 'red'
             }"
           >
             {{
               (responses.response === 'left' ? leftOption : rightOption) ===
-              correctResponse
+              getCorrectResponse()
                 ? 'korrekt'
                 : 'inkorrekt'
             }}
@@ -59,7 +59,7 @@
               $magpie.addTrialData({
                 trialType,
                 trialNumber,
-                ...trialData,
+                ...$magpie.currentTrial[trialType],
                 ...responses.mouseTrack,
                 response:
                   responses.response === 'left' ? leftOption : rightOption,
@@ -80,10 +80,6 @@
 export default {
   name: 'TrialScreen',
   props: {
-    trialData: {
-      type: Object,
-      required: true
-    },
     trialType: {
       type: String,
       required: true
@@ -92,17 +88,9 @@ export default {
       type: Number,
       required: true
     },
-    sentence: {
-      type: String,
-      required: true
-    },
     trueIsLeft: {
       type: Boolean,
       required: true
-    },
-    correctResponse: {
-      type: String,
-      default: ''
     },
     group: {
       type: String,
@@ -127,6 +115,14 @@ export default {
     },
     rightOption() {
       return !this.trueIsLeft ? 'w' : 'f';
+    }
+  },
+  methods: {
+    getCorrectResponse() {
+      return this.trialType === 'training' &&
+        this.$magpie.currentTrial.training.type !== 'Some critical'
+        ? this.$magpie.currentTrial.training['correct.response']
+        : this.groupCorrectResponse;
     }
   }
 };
