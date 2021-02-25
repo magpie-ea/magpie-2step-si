@@ -66,22 +66,13 @@
               :mouse-track.sync="responses.mouseTrack"
             >
               <template #option1>
-                <div v-if="i % 2 === 0" class="optionBox left">
-                  X
-                </div>
+                <div v-if="i % 2 === 0" class="optionBox left">X</div>
               </template>
               <template #option2>
-                <div v-if="i % 2 === 1" class="optionBox right">
-                  X
-                </div>
+                <div v-if="i % 2 === 1" class="optionBox right">X</div>
               </template>
-              <template #stimulus>
+              <template #stimulus="{ coordinates }">
                 <Timer key="mouse-time" v-model="responses.timer" />
-                <Wait
-                  key="mt-start"
-                  :time="0"
-                  @done="$magpie.mousetracking.start()"
-                />
               </template>
               <template #feedback>
                 <Wait
@@ -142,7 +133,7 @@
       </template>
 
       <Screen key="input_method">
-        <template #0="{responses}">
+        <template #0="{ responses }">
           <p>What did you use to complete this task?</p>
           <ForcedChoiceInput
             :response.sync="responses.inputmethod"
@@ -156,12 +147,12 @@
       </Screen>
 
       <Screen key="additional-information" title="Additional information">
-        <template #0="{responses}">
+        <template #0="{ responses }">
           <p>
             Answering the following questions is optional, but your answers will
             help us analyze our results.
           </p>
-          <div style="text-align: left; width: 200px; margin: 0 auto;">
+          <div style="text-align: left; width: 200px; margin: 0 auto">
             <p>
               <label
                 >Age
@@ -171,23 +162,23 @@
             <p>
               <label
                 >Gender
-                <select v-model="responses.gender"
-                  ><option value="male">male</option>
+                <select v-model="responses.gender">
+                  <option value="male">male</option>
                   <option value="female">female</option>
-                  <option value="other">other</option></select
-                ></label
+                  <option value="other">other</option>
+                </select></label
               >
             </p>
             <p>
               <label
                 >Level of Eduction
-                <select v-model="responses.education"
-                  ><option value="Graduated Highschool"
-                    >Graduated Highschool</option
-                  >
+                <select v-model="responses.education">
+                  <option value="Graduated Highschool">
+                    Graduated Highschool
+                  </option>
                   <option value="Graduated College">Graduated College</option>
-                  <option value="Higher degree">Higher degree</option></select
-                ></label
+                  <option value="Higher degree">Higher degree</option>
+                </select></label
               >
             </p>
             <p>
@@ -197,7 +188,7 @@
                   v-model="responses.languages"
                   type="text"
                   placeholder="langauge(s) spoken at home when you were a child"
-                  style="width: 400px;"
+                  style="width: 400px"
               /></label>
             </p>
             Further comments
@@ -220,9 +211,7 @@
       <!-- While developing your experiment, using the DebugResults screen is fine,
       once you're going live, you can use the <SubmitResults> screen to automatically send your experimental data to the server. -->
 
-      <Screen :title="'Thanks!'">
-        Goodbye
-      </Screen>
+      <Screen :title="'Thanks!'"> Goodbye </Screen>
     </template>
   </Experiment>
 </template>

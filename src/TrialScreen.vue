@@ -16,7 +16,7 @@
             {{ rightOption }}
           </div>
         </template>
-        <template #stimulus>
+        <template #stimulus="{ coordinates }">
           <Rsvp
             class="rsvp"
             :chunks="$magpie.currentTrial[trialType].stimulus.split(' ')"
@@ -27,10 +27,6 @@
             key="warning"
             :time="500"
             @done="displayWarning = $magpie.mousetracking.time.length <= 1"
-          /><Wait
-            key="mt-start"
-            :time="0"
-            @done="$magpie.mousetracking.start()"
           />
           <span v-if="displayWarning" class="exclamation-points">!!!</span>
         </template>
