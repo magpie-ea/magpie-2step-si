@@ -108,7 +108,6 @@
           :trial-type="'training'"
           :trial-number="i"
           :group="groupName"
-          :groupCriticalResponse="groupCorrectResponse"
           :true-is-left="lr === 1"
           :progress="(i - 1) / 50"
         />
@@ -123,12 +122,11 @@
       </Screen>
 
       <template v-for="i in 2">
-        <TrialScree
+        <TrialScreen
           :key="'test-' + i"
           :trial-type="'main'"
           :trial-number="i"
           :group="groupName"
-          :groupCorrectResponse="groupCorrectResponse"
           :true-is-left="lr === 1"
           :progress="(i - 1) / 90"
         />
@@ -246,10 +244,6 @@ export default {
   computed: {
     groupName() {
       return this.group === 0 ? 'semantic' : 'pragmatic';
-    },
-    groupCorrectResponse() {
-      console.log(this.group === 0 ? 'w' : 'f');
-      return this.group === 0 ? 'w' : 'f';
     }
   },
   mounted() {
