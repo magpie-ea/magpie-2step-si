@@ -54,7 +54,7 @@
         <button @click="$magpie.nextScreen()">Weiter</button>
       </Screen>
 
-      <template v-for="i in 6">
+      <template v-for="i in 1">
         <Screen :key="'mouse_speed_test-' + i">
           <template #0="{ responses }">
             Klicken Sie auf "go" und bewegen Sie den Mauszeiger so schnell wie
@@ -102,12 +102,13 @@
 
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
-      <template v-for="i in 50">
+      <template v-for="i in 9">
         <TrialScreen
           :key="'training-' + i"
           :trial-type="'training'"
           :trial-number="i"
           :group="groupName"
+          :groupCriticalResponse="groupCorrectResponse"
           :true-is-left="lr === 1"
           :progress="(i - 1) / 50"
         />
@@ -121,12 +122,13 @@
         </button>
       </Screen>
 
-      <template v-for="i in 90">
-        <TrialScreen
+      <template v-for="i in 2">
+        <TrialScree
           :key="'test-' + i"
           :trial-type="'main'"
           :trial-number="i"
           :group="groupName"
+          :groupCorrectResponse="groupCorrectResponse"
           :true-is-left="lr === 1"
           :progress="(i - 1) / 90"
         />
@@ -246,6 +248,7 @@ export default {
       return this.group === 0 ? 'semantic' : 'pragmatic';
     },
     groupCorrectResponse() {
+      console.log(this.group === 0 ? 'w' : 'f');
       return this.group === 0 ? 'w' : 'f';
     }
   },
