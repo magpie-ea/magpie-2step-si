@@ -118,8 +118,6 @@ export default {
   },
   methods: {
     getCorrectResponse() {
-      console.log(this.group);
-      console.log(this.groupCorrectResponse); // Why doesn't this work?
       return this.trialType === 'training' &&
         this.$magpie.currentTrial.training.type !== 'Some critical'
         ? this.$magpie.currentTrial.training['correct.response']

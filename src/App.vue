@@ -54,7 +54,7 @@
         <button @click="$magpie.nextScreen()">Weiter</button>
       </Screen>
 
-      <template v-for="i in 1">
+      <template v-for="i in 6">
         <Screen :key="'mouse_speed_test-' + i">
           <template #0="{ responses }">
             Klicken Sie auf "go" und bewegen Sie den Mauszeiger so schnell wie
@@ -102,7 +102,7 @@
 
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
-      <template v-for="i in 9">
+      <template v-for="i in 50">
         <TrialScreen
           :key="'training-' + i"
           :trial-type="'training'"
@@ -121,7 +121,7 @@
         </button>
       </Screen>
 
-      <template v-for="i in 2">
+      <template v-for="i in 90">
         <TrialScreen
           :key="'test-' + i"
           :trial-type="'main'"
