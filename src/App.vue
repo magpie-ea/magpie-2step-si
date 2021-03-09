@@ -15,8 +15,10 @@
       <div></div>
     </template>
 
+
     <!-- The contents of the #screens template slot define your experiment -->
     <template #screens>
+      
       <Screen
         :title="'Probandeninformation zur Studie “2Step-SI”'"
         class="instructions"
@@ -25,6 +27,25 @@
         <br />
         <!-- The $magpie field gives you access to magpie-specific functionality -->
         <button @click="$magpie.nextScreen()">Weiter</button>
+      </Screen>
+
+      <Screen key="IDKennung" title="Persönliche Identifikationskennung">
+        <template #0="{ responses }">
+          <p>
+            Bitte geben Sie hier eine Identifikationskennung an, mit der wir Ihren später VP-Stunden gutschreiben können. Sie können Ihre Matrikelnummer oder Ihren Namen verwenden, aber um die Anonymität Ihrer Daten besser zu sichern, ist eine Kennung, die nicht auf Ihre Person schließen lässt anzuraten.
+          </p>
+            <TextareaInput :response.sync="responses.IDKennung"></TextareaInput>
+          </div>
+
+          <button
+            @click="
+              $magpie.addExpData(responses);
+              $magpie.nextScreen();
+            "
+          >
+            Next
+          </button>
+        </template>
       </Screen>
 
       <Screen
@@ -54,7 +75,7 @@
         <button @click="$magpie.nextScreen()">Weiter</button>
       </Screen>
 
-      <template v-for="i in 6">
+      <template v-for="i in 1">
         <Screen :key="'mouse_speed_test-' + i">
           <template #0="{ responses }">
             Klicken Sie auf "go" und bewegen Sie den Mauszeiger so schnell wie
@@ -102,7 +123,7 @@
 
       <!-- Practice trials -->
       <!-- Here we create screens in a loop for every entry in training -->
-      <template v-for="i in 50">
+      <template v-for="i in 1">
         <TrialScreen
           :key="'training-' + i"
           :trial-type="'training'"
@@ -121,7 +142,7 @@
         </button>
       </Screen>
 
-      <template v-for="i in 90">
+      <template v-for="i in 1">
         <TrialScreen
           :key="'test-' + i"
           :trial-type="'main'"
@@ -222,7 +243,7 @@ import test from '../trials/test.csv';
 import training from '../trials/training.csv';
 import _ from 'lodash';
 import TrialScreen from './TrialScreen.vue';
-import Instructions from './InstructionsProlific';
+import Instructions from './InstructionsLab';
 import Instructions2 from './Instructions2';
 
 export default {

@@ -13,7 +13,7 @@
     </p>
     <h2>Versuchsablauf</h2>
     <p>
-      Das Experiment wird insgesamt etwa 20-25 Minuten in Anspruch nehmen und
+      Das Experiment wird insgesamt etwa 25-30 Minuten in Anspruch nehmen und
       besteht aus einer Übungsphase, die Sie an die Bedienung des Experiments
       und Ihre Aufgabe heranführt, sowie der eigentlichen Testphase.
     </p>
@@ -64,18 +64,18 @@
       Die Versuchsleitung verpflichtet sich Ihnen gegenüber, die gewonnenen
       Daten pseudonymisiert zu behandeln und Dritten eine Zuordnung Ihrer Person
       zu den Daten nicht zu ermöglichen. Ihre letztlich vollständig
-      anonymisierten Daten werden nur zu Forschungszwecken gespeichert und
-      verwertet. Erfasste Primärdaten werden gemäß den Empfehlungen der
+      anonymisierten Daten werden nur zu Lehr- und Forschungszwecken gespeichert 
+      und verwertet. Erfasste Primärdaten werden gemäß den Empfehlungen der
       Deutschen Forschungsgemeinschaft (DFG) für mindestens 10 Jahre nach der
       Datenerhebung aufbewahrt.
     </p>
     <p>
-      Es ist geplant, die Daten und Ergebnisse dieser Studie als
+      Es ist geplant, die Daten und Ergebnisse dieser Studie als Hilfsmittel
+      in der wissenschaftlichen Lehre zu benutzen, sowie die Daten in einer
       wissenschaftliche Publikation zu veröffentlichen. Dies geschieht in
       anonymisierter Form, d. h. ohne dass die Daten einer bestimmten Person
       zugeordnet werden können. Die vollständig anonymisierten Daten dieser
-      Studie sollen zudem als offene Daten im Internet in einem Datenarchiv
-      (voraussichtlich osf.org) zugänglich gemacht werden. Damit folgt diese
+      Studie sollen zudem als offene Daten im Internet zugänglich gemacht werden. Damit folgt diese
       Studie den Empfehlungen der Deutschen Forschungsgemeinschaft (DFG) und der
       Deutschen Gesellschaft für Psychologie (DGPs) zur Qualitätssicherung in
       der Forschung. Ein solches Vorgehen bedeutet, dass auch andere
@@ -98,7 +98,7 @@
       auch immer. Auch steht Ihnen eine Anerkennung von einer
       Versuchspersonenstunde zu, wenn das Experiment aus technischen oder
       anderen nicht in Ihrer Macht liegenden Gründen nicht beendet werden kann.
-      Nehmen Sie in diesem Fall Kontakt mit der Versuchsleitung auf. Eine
+      Nehmen Sie in diesem Fall Kontakt mit der <a href="mailto:mstoeber@uni-osnabrueck.de">Versuchsleitung</a> auf. Eine
       finanzielle Aufwandsentschädigung ist für dieses Experiment nicht
       vorgesehen.
     </p>
