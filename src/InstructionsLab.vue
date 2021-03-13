@@ -13,7 +13,7 @@
     </p>
     <h2>Versuchsablauf</h2>
     <p>
-      Das Experiment wird insgesamt etwa 25-30 Minuten in Anspruch nehmen und
+      Das Experiment wird insgesamt etwa 30-35 Minuten in Anspruch nehmen und
       besteht aus einer Übungsphase, die Sie an die Bedienung des Experiments
       und Ihre Aufgabe heranführt, sowie der eigentlichen Testphase.
     </p>
